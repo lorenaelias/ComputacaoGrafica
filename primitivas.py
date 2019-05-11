@@ -35,8 +35,8 @@ def _linhaH(x0, y0, x1, y1, color, menu):
         if(menu == True):
             screen.set_at((x + x0, y), color)
         else:
-            #if(y > 100):       # tentativa para nao desenhar linha no menu a nao ser que seja no icone
-            screen.set_at((x + x0, y), color)
+            if(y > 100):       # tentativa para nao desenhar linha no menu a nao ser que seja no icone
+                screen.set_at((x + x0, y), color)
         if D > 0:
             y = y + yi
             D = D - 2 * dx
@@ -56,8 +56,8 @@ def _linhaV(x0, y0, x1, y1, color, menu):
         if (menu == True):
             screen.set_at((x, y + y0), color)
         else:
-            #if (y > 100):      # tentativa para nao desenhar linha no menu a nao ser que seja no icone
-            screen.set_at((x, y + y0), color)
+            if (y + y0 > 100):      # tentativa para nao desenhar linha no menu a nao ser que seja no icone
+                screen.set_at((x, y + y0), color)
         if D > 0:
             x = x + xi
             D = D - 2 * dy
