@@ -141,18 +141,48 @@ def quadrado(x, y, w, h, color,menu):
     testalinha(x, h, x, y, color,menu)
     pygame.display.flip()
 
-#essa curva só funciona para 1 quadrante
-def curvaB(p1, p2, p3, p4, color):
-    for t in numpy.arange(0, 1, 0.001):
-        omt = 1 - t
-        omt2 = omt * omt
-        omt3 = omt2 * omt
-        t2 = t * t
-        t3 = t2 * t
-        x = omt3 * p1[0] + ((3 * omt2) * t * p1[0]) + (3 * omt * t2 * p3[0]) + t3 * p4[0]
-        y = omt3 * p1[1] + ((3 * omt2) * t * p1[1]) + (3 * omt * t2 * p3[1]) + t3 * p4[1]
-        x = int(numpy.floor(x))
-        y = int(numpy.floor(y))
+def bezierIngenuo(p1, p4, cor):
+    defaultBack = screen.copy()
+    while 1:
+        for e in pygame.event.get():
 
-        screen.set_at((x, y), color)
-        pygame.display.flip()
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                # screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
+                screen.blit(defaultBack, (0, 0))
+                aux = pygame.mouse.get_pressed()
+
+                if aux[2] == 1:  # clique com o botao direito para sair
+                    print("ACABOU DE FAZER A CURVAAAA")
+                    screen.blit(teste, (0, 0))
+
+                    return
+                else:
+                    p3 = pygame.mouse.get_pos()
+                    for t in numpy.arange(0, 1, 0.0001):
+                        omt = 1 - t
+                        omt2 = omt * omt
+                        omt3 = omt2 * omt
+                        t2 = t * t
+                        t3 = t2 * t
+                        x = omt3 * p1[0] + ((3 * omt2) * t * p1[0]) + (3 * omt * t2 * p3[0]) + t3 * p4[0]
+                        y = omt3 * p1[1] + ((3 * omt2) * t * p1[1]) + (3 * omt * t2 * p3[1]) + t3 * p4[1]
+                        x = int(numpy.floor(x))
+                        y = int(numpy.floor(y))
+                        if (y > 100):
+                            screen.set_at((x, y), cor)
+                    pygame.display.flip()
+                    teste = screen.copy()
+
+def curvabotao(p1,p2,p3,color):
+    for t in numpy.arange(0,1,0.001):
+        omt  = 1-t
+        omt2 = omt*omt
+        omt3 = omt2*omt
+        t2   = t*t
+        t3   = t2*t
+        x    = omt3 * p1[0] + ((3*omt2)*t*p1[0]) + (3*omt*t2*p2[0]) +t3*p3[0]
+        y    = omt3 * p1[1] + ((3*omt2)*t*p1[1]) + (3*omt*t2*p2[1]) +t3*p3[1]
+        x    = int(numpy.floor(x))
+        y    = int(numpy.floor(y))
+        screen.set_at((x,y), color)
+    pygame.display.flip()

@@ -1,4 +1,5 @@
 import pygame
+import numpy
 import math
 import sys
 from primitivas import *
@@ -35,7 +36,9 @@ mousePos = (0, 0)
 botoesMenu = []
 primitivas = ['Linha', 'Retângulo', 'Quadrado', 'Círculo', 'Polilinha', 'Curva']  # relação numerica de cada primitiva
 primitivaNum = 0
-click_on = False
+
+
+# sys.setrecursionlimit(1000000)   # aumenta o tamanho da pilha para recursao
 
 def iniciaMenu():
     global colorNum
@@ -89,24 +92,24 @@ def iniciaMenu():
     botoesMenu.append((aux, (width // 30), (aux + 50), (width // 30) + 50))
 
 
-# screen.set_clip((0,100,900,600))
-# screen.set_clip((0,0,0,100))
-
 def desenha_icone(i):
     if i == 0:
         linha(40, 70, 70, 40, black, True)
     if i == 1:
-        retangulo(134, 40, 176, 70, black,True)
+        retangulo(134, 40, 176, 70, black, True)
     if i == 2:
-        quadrado(242, 42, 270, 70, black,True)
+        quadrado(242, 42, 270, 70, black, True)
     if i == 3:
         circulo(355, 55, 15, black, True)
     if i == 4:
         linha(440, 70, 450, 40, black, True)
         linha(450, 40, 460, 70, black, True)
         linha(460, 70, 470, 40, black, True)
+    if i == 5:
+        curvabotao((535,35),(550,60),(575,75),black)
     if i == 6:
         screen.blit(imagemBalde, (630, 30))
+
 
 # faz o botao ficar verde quando for selecionado
 def muda_botao(pos):
@@ -168,7 +171,7 @@ def desenha_retangulo(pos):
         for e in pygame.event.get():
             x, y = pygame.mouse.get_pos()
             screen.blit(defaultBack, (0, 0))
-            retangulo(pos[0], pos[1], x, y, listaCores[colorNum],False)
+            retangulo(pos[0], pos[1], x, y, listaCores[colorNum], False)
             screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
             if (e.type == pygame.MOUSEBUTTONUP):
                 return
@@ -185,7 +188,7 @@ def desenha_quadrado(pos):
             s = abs(y - pos[1]) // (y - pos[1]) if y != pos[1] else 1
             if (x < pos[0]):
                 s *= -1
-            quadrado(pos[0], pos[1], x, pos[1] + ((x - pos[0]) * s), listaCores[colorNum],False)
+            quadrado(pos[0], pos[1], x, pos[1] + ((x - pos[0]) * s), listaCores[colorNum], False)
             screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
             if (e.type == pygame.MOUSEBUTTONUP):
                 return
@@ -198,10 +201,7 @@ def desenha_circulo(pos):
         for e in pygame.event.get():
             x, y = pygame.mouse.get_pos()
             screen.blit(defaultBack, (0, 0))
-
             raio = int(math.sqrt(((x - pos[0]) ** 2) + ((y - pos[1]) ** 2)))
-            # if r > start[0] - (screen_size[0] >> 2):
-            #    r = start[0] - (screen_size[0] >> 2)
             circulo(pos[0], pos[1], raio, listaCores[colorNum], False)
             screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
             if (e.type == pygame.MOUSEBUTTONUP):
@@ -223,7 +223,7 @@ def poli_aux(pos):
 
             x, y = pygame.mouse.get_pos()
             screen.blit(defaultBack, (0, 0))
-            linha(pos[0], pos[1], x, y, listaCores[colorNum],False)
+            linha(pos[0], pos[1], x, y, listaCores[colorNum], False)
             screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
             if (e.type == pygame.MOUSEBUTTONDOWN):
                 pygame.display.update()
@@ -234,33 +234,67 @@ def poli_aux(pos):
                     return
 
 
-# algoritmo de preenchimento
-# coloquei aqui para diminuir o tamanho da stack, usando o listaCores[colorNum] em vez de passar como parametro
-def floodFill(x, y):
-    screen.set_at((x,y), listaCores[colorNum])
-    if (screen.get_at((x, y - 1)) == white and y > 0):
-        floodFill(x, y - 1)
-    if (screen.get_at((x + 1, y)) == white and x < 900):
-        floodFill(x + 1, y)
-    if (screen.get_at((x,y+1)) == white and y < 600):
-        floodFill(x, y + 1)
-    if (screen.get_at((x - 1, y)) == white and x > 0):
-        floodFill(x - 1, y)
-
-
-#implementar como o floodFill sera chamado
+# implementar como o floodFill sera chamado
 def preenche(pos):
     defaultBack = screen.copy()
     while 1:
         for e in pygame.event.get():
             screen.blit(defaultBack, (0, 0))
-            floodFill(pos[0],pos[1])
+            if (pos[1] > 100):
+                flood_Fill(screen, pos[0], pos[1], listaCores[colorNum])
             screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
             if (e.type == pygame.MOUSEBUTTONUP):
                 return
 
 
+# replaces all points of same starting colour,
+# with a new colour, up to a border with
+# different starting colour
+def flood_Fill(surface, x, y, newColor):
+    pilha = [(x, y)]
+    corOriginal = surface.get_at((x, y))  # cor de fundo original
+
+    while len(pilha) > 0:
+        x, y = pilha.pop()
+
+        #        if((x < 0 or x>900) or (y<100 or y>600)):
+        #            continue
+        if surface.get_at((x, y)) != corOriginal:
+            continue
+        print("(", x, ",", y, ")")
+        surface.set_at((x, y), newColor)
+        # pygame.display.update()
+        if ((x + 1) <= 899):
+            pilha.append((x + 1, y))  # poe o pixel da direita na pilha para ser preenchido
+        if ((x - 1) >= 0):
+            pilha.append((x - 1, y))  # poe o pixel da esquerda na pilha para ser preenchido
+        if ((y + 1) <= 599):
+            pilha.append((x, y + 1))  # poe o pixel de baixo na pilha para ser preenchido
+        if ((y - 1) >= 100):
+            pilha.append((x, y - 1))  # poe o pixel de cima na pilha para ser preenchido
+
+
 # def desenha_curva(pos):
+
+
+
+
+def desenha_curva():
+    sig = True
+    while sig:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                pos = pygame.mouse.get_pos()
+                sig = False
+                break
+
+    while 1:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                pos2 = pygame.mouse.get_pos()
+                bezierIngenuo(pos, pos2,listaCores[colorNum])
+                return
+    pygame.display.flip()
 
 
 def click_handle(pos):
@@ -276,11 +310,27 @@ def click_handle(pos):
         desenha_quadrado(pos)
     if (primitivaNum == 3):
         desenha_circulo(pos)
-    if(primitivaNum == 6):
+    if (primitivaNum == 5):
+        desenha_curva()
+    if (primitivaNum == 6):
         preenche(pos)
+
+def borracha(pos):
+    while 1:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                screen.set_at((pos[0],pos[1]), white)
+                return
 
 iniciaMenu()
 print(botoesMenu)
+# linha(0,100,0,600,black,True)
+linha(0, 100, 900, 100, MenuColor,
+      True)  # essa linha é importante pra nao deixar a coloração vazar quando a figura não está totalmente
+# contida na tela de desenho
+# linha(899,100,899,600,black,True)
+# linha(0,599,900,599,black,True)
+
 
 while 1:
     defaultMenu = pygame.surface.Surface((900, 100))
@@ -291,7 +341,6 @@ while 1:
             sys.exit()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            click_on = True
             click_handle(mousePos)
 
     pygame.display.update()
