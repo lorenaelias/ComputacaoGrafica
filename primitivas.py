@@ -16,7 +16,7 @@ screen = pygame.display.set_mode(screen_size)
 layer = pygame.surface.Surface(screen_size)
 layer.blit(screen, (0, 0))
 
-pygame.display.set_caption('Trabalho computacao grafica')
+pygame.display.set_caption('Graphic Computing')
 screen.fill(background)
 layer.fill(white)
 pygame.display.flip()

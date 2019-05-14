@@ -8,8 +8,8 @@ from primitivas import *
 pygame.init()
 screen = pygame.display.set_mode((900, 600))
 screen.fill([255, 255, 255])
-imagemBalde = pygame.transform.scale(pygame.image.load('balde-removebg.png'), (50, 50))
-imagemIcone = pygame.transform.scale(pygame.image.load('Palette.png'), (32, 32))
+imagemBalde = pygame.transform.scale(pygame.image.load('res/balde.png'), (50, 50))
+imagemIcone = pygame.transform.scale(pygame.image.load('res/icon.png'), (32, 32))
 pygame.display.set_icon(imagemIcone)
 
 # cores
