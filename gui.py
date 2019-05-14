@@ -1,7 +1,9 @@
 import sys
 import math
-from features.graphic_primitives.primitives import *
-from features.menu.menu import menu_inicialization, draw_icon
+import pygame
+
+from features.primitives import linha, retangulo, quadrado, circulo, bezierIngenuo, curvabotao
+from utils import color, dimen
 
 bucketImg = pygame.transform.scale(pygame.image.load('res/bucket.png'), (50, 50))
 iconImg = pygame.transform.scale(pygame.image.load('res/icon.png'), (32, 32))
@@ -18,6 +20,83 @@ mousePosition = (0, 0)
 menuButtons = []
 primitiveNum = 0
 
+def menu_init():
+    global colorNum
+    pygame.draw.rect(screen, color.primaryColor, pygame.Rect(0, 0, dimen.width, 100))  # Menu cinza principal
+
+    aux = (dimen.width // 30)
+    pygame.draw.rect(screen, color.terciaryColor,
+                     pygame.Rect((dimen.width // 30), (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    pygame.draw.rect(screen, color.green,
+                     pygame.Rect((dimen.width // 30), (dimen.width // 30) + 50, 50, 5))  # Botao Linha
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (aux + 50)))
+    draw_icon(0)
+
+    aux = (dimen.width // 30) + 100
+    pygame.draw.rect(screen, color.secondaryColor,
+                     pygame.Rect((dimen.width // 30) + 100, (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    pygame.draw.rect(screen, color.primaryColor, pygame.Rect(aux, (dimen.width // 30) + 50, 50, 5))
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (dimen.width // 30) + 50))
+    draw_icon(1)
+
+    aux = (dimen.width // 30) + 200
+    pygame.draw.rect(screen, color.secondaryColor,
+                     pygame.Rect((dimen.width // 30) + 200, (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    pygame.draw.rect(screen, color.primaryColor, pygame.Rect(aux, (dimen.width // 30) + 50, 50, 5))
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (dimen.width // 30) + 50))
+    draw_icon(2)
+
+    aux = (dimen.width // 30) + 300
+    pygame.draw.rect(screen, color.secondaryColor,
+                     pygame.Rect((dimen.width // 30) + 300, (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    pygame.draw.rect(screen, color.primaryColor, pygame.Rect(aux, (dimen.width // 30) + 50, 50, 5))
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (dimen.width // 30) + 50))
+    draw_icon(3)
+
+    aux = (dimen.width // 30) + 400
+    pygame.draw.rect(screen, color.secondaryColor,
+                     pygame.Rect((dimen.width // 30) + 400, (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    pygame.draw.rect(screen, color.primaryColor, pygame.Rect(aux, (dimen.width // 30) + 50, 50, 5))
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (dimen.width // 30) + 50))
+    draw_icon(4)
+
+    aux = (dimen.width // 30) + 500
+    pygame.draw.rect(screen, color.secondaryColor,
+                     pygame.Rect((dimen.width // 30) + 500, (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    pygame.draw.rect(screen, color.primaryColor, pygame.Rect(aux, (dimen.width // 30) + 50, 50, 5))
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (dimen.width // 30) + 50))
+    draw_icon(5)
+
+    aux = (dimen.width // 30) + 600
+    pygame.draw.rect(screen, color.secondaryColor,
+                     pygame.Rect((dimen.width // 30) + 600, (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    pygame.draw.rect(screen, color.primaryColor, pygame.Rect(aux, (dimen.width // 30) + 50, 50, 5))
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (dimen.width // 30) + 50))
+    draw_icon(6)
+
+    aux = (dimen.width // 30) + 700
+    pygame.draw.rect(screen, color.colorList[colorNum],
+                     pygame.Rect((dimen.width // 30) + 700, (dimen.width // 30), 50, 50))  # Botao Externo Linha
+    menuButtons.append((aux, (dimen.width // 30), (aux + 50), (dimen.width // 30) + 50))
+
+
+def draw_icon(primitive):
+    if primitive == 0:
+        linha(40, 70, 70, 40, color.black, True)
+    if primitive == 1:
+        retangulo(134, 40, 176, 70, color.black, True)
+    if primitive == 2:
+        quadrado(242, 42, 270, 70, color.black, True)
+    if primitive == 3:
+        circulo(355, 55, 15, color.black, True)
+    if primitive == 4:
+        linha(440, 70, 450, 40, color.black, True)
+        linha(450, 40, 460, 70, color.black, True)
+        linha(460, 70, 470, 40, color.black, True)
+    if primitive == 5:
+        curvabotao((535, 35), (550, 60), (575, 75), color.black)
+    if primitive == 6:
+        screen.blit(bucketImg, (630, 30))
 
 # faz o botao ficar verde quando for selecionado
 def muda_botao(pos):
@@ -200,33 +279,33 @@ def desenha_curva():
 
 
 def click_handle(pos):
-    if (pos[1] <= 100):
+    if pos[1] <= 100:
         muda_botao(pos)
-    elif (primitiveNum == 4):
+    elif primitiveNum == 4:
         poli_aux(pos)
-    if (primitiveNum == 0):
+    if primitiveNum == 0:
         desenha_linha(pos)
-    if (primitiveNum == 1):
+    if primitiveNum == 1:
         desenha_retangulo(pos)
-    if (primitiveNum == 2):
+    if primitiveNum == 2:
         desenha_quadrado(pos)
-    if (primitiveNum == 3):
+    if primitiveNum == 3:
         desenha_circulo(pos)
-    if (primitiveNum == 5):
+    if primitiveNum == 5:
         desenha_curva()
-    if (primitiveNum == 6):
+    if primitiveNum == 6:
         preenche(pos)
 
 
 def borracha(pos):
     while 1:
         for e in pygame.event.get():
-            if (e.type == pygame.MOUSEBUTTONDOWN):
+            if e.type == pygame.MOUSEBUTTONDOWN:
                 screen.set_at((pos[0], pos[1]), color.white)
                 return
 
 
-menu_inicialization()
+menu_init()
 print(menuButtons)
 # linha(0,100,0,600,black,True)
 linha(0, 100, 900, 100, color.primaryColor,

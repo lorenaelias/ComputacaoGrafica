@@ -1,7 +1,6 @@
 import numpy
 import pygame
-from utils import color
-from utils import dimen
+from utils import color, dimen
 
 # style
 background = color.white
