@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="325e8918-a6a0-4994-ba05-12be6bf772a7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/primitives.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/graphic_primitives/primitives.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/graphic_primitives/primitivesEnum.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/gui.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/menu/menu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/bucket.png" beforeDir="false" afterPath="$PROJECT_DIR$/bucket.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/color.py" beforeDir="false" afterPath="$PROJECT_DIR$/color.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/dimen.py" beforeDir="false" afterPath="$PROJECT_DIR$/dimen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Zupper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Zupper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +17,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="222">
+              <caret line="276" column="24" selection-start-line="276" selection-start-column="24" selection-end-line="276" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,12 +83,12 @@
         <option value="$PROJECT_DIR$/features/graphic_primitives/primitivesEnum.py" />
         <option value="$PROJECT_DIR$/features/main/gui.py" />
         <option value="$PROJECT_DIR$/features/main/menu.py" />
-        <option value="$PROJECT_DIR$/features/gui.py" />
         <option value="$PROJECT_DIR$/features/menu/menu.py" />
         <option value="$PROJECT_DIR$/feature/gui.py" />
         <option value="$PROJECT_DIR$/feature/menu/menu.py" />
         <option value="$PROJECT_DIR$/feature/menu.py" />
         <option value="$PROJECT_DIR$/menu.py" />
+        <option value="$PROJECT_DIR$/features/gui.py" />
         <option value="$PROJECT_DIR$/gui.py" />
       </list>
     </option>
@@ -144,11 +139,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Zupper\Documents\computacaografica\features" />
+      <recent name="C:\Users\Zupper\Documents\computacaografica\utils" />
+      <recent name="C:\Users\Zupper\Documents\computacaografica\res" />
       <recent name="C:\Users\Zupper\Documents\computacaografica" />
       <recent name="C:\Users\Zupper\Documents\computacaografica\feature" />
-      <recent name="C:\Users\Zupper\Documents\computacaografica\features\graphic_primitive" />
-      <recent name="C:\Users\Zupper\Documents\computacaografica\features\menu" />
-      <recent name="C:\Users\Zupper\Documents\computacaografica\features" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -207,7 +202,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32978722" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.71631205" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.71631205" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -252,7 +247,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/Palette.png" />
-    <entry file="file://$PROJECT_DIR$/dimen.py">
+    <entry file="file://$PROJECT_DIR$/utils/dimen.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
@@ -285,7 +280,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/color.py">
+    <entry file="file://$PROJECT_DIR$/utils/color.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
@@ -309,7 +304,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/primitives.py">
+    <entry file="file://$PROJECT_DIR$/features/primitives.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
@@ -344,8 +339,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="222">
+          <caret line="276" column="24" selection-start-line="276" selection-start-column="24" selection-end-line="276" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

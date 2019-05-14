@@ -20,6 +20,7 @@ mousePosition = (0, 0)
 menuButtons = []
 primitiveNum = 0
 
+
 def menu_init():
     global colorNum
     pygame.draw.rect(screen, color.primaryColor, pygame.Rect(0, 0, dimen.width, 100))  # Menu cinza principal
@@ -97,6 +98,7 @@ def draw_icon(primitive):
         curvabotao((535, 35), (550, 60), (575, 75), color.black)
     if primitive == 6:
         screen.blit(bucketImg, (630, 30))
+
 
 # faz o botao ficar verde quando for selecionado
 def muda_botao(pos):
@@ -226,10 +228,10 @@ def preenche(pos):
     while 1:
         for e in pygame.event.get():
             screen.blit(defaultBack, (0, 0))
-            if (pos[1] > 100):
+            if pos[1] > 100:
                 flood_Fill(screen, pos[0], pos[1], color.colorList[colorNum])
             screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
-            if (e.type == pygame.MOUSEBUTTONUP):
+            if e.type == pygame.MOUSEBUTTONUP:
                 return
 
 
@@ -243,13 +245,10 @@ def flood_Fill(surface, x, y, newColor):
     while len(pilha) > 0:
         x, y = pilha.pop()
 
-        #        if((x < 0 or x>900) or (y<100 or y>600)):
-        #            continue
         if surface.get_at((x, y)) != corOriginal:
             continue
         print("(", x, ",", y, ")")
         surface.set_at((x, y), newColor)
-        # pygame.display.update()
         if (x + 1) <= 899:
             pilha.append((x + 1, y))  # poe o pixel da direita na pilha para ser preenchido
         if (x - 1) >= 0:
@@ -264,14 +263,14 @@ def desenha_curva():
     sig = True
     while sig:
         for e in pygame.event.get():
-            if (e.type == pygame.MOUSEBUTTONDOWN):
+            if e.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 sig = False
                 break
 
     while 1:
         for e in pygame.event.get():
-            if (e.type == pygame.MOUSEBUTTONDOWN):
+            if e.type == pygame.MOUSEBUTTONDOWN:
                 pos2 = pygame.mouse.get_pos()
                 bezierIngenuo(pos, pos2, color.colorList[colorNum])
                 return
@@ -307,13 +306,9 @@ def borracha(pos):
 
 menu_init()
 print(menuButtons)
-# linha(0,100,0,600,black,True)
 linha(0, 100, 900, 100, color.primaryColor,
       True)  # essa linha é importante pra nao deixar a coloração vazar quando a figura não está totalmente
 # contida na tela de desenho
-# linha(899,100,899,600,black,True)
-# linha(0,599,900,599,black,True)
-
 
 while 1:
     defaultMenu = pygame.Surface(dimen.screen_size)

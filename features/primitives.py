@@ -27,7 +27,7 @@ def _linhaH(x0, y0, x1, y1, color, menu):
     D = 2 * dy - dx
     y = y0
     for x in range(dx):
-        if (menu == True):
+        if menu == True:
             screen.set_at((x + x0, y), color)
         else:
             if y > 100:  # tentativa para nao desenhar linha no menu a nao ser que seja no icone
@@ -143,13 +143,12 @@ def bezierIngenuo(p1, p4, cor):
     while 1:
         for e in pygame.event.get():
 
-            if (e.type == pygame.MOUSEBUTTONDOWN):
+            if e.type == pygame.MOUSEBUTTONDOWN:
                 # screen.blit(defaultBack, (0, 0), (0, 0, 900, 100))
                 screen.blit(defaultBack, (0, 0))
                 aux = pygame.mouse.get_pressed()
 
                 if aux[2] == 1:  # clique com o botao direito para sair
-                    print("ACABOU DE FAZER A CURVAAAA")
                     screen.blit(teste, (0, 0))
 
                     return
